@@ -1,9 +1,0 @@
-C:\Users\basav\Downloads\dms_project_final\dms-project\backend\file-storage-service\src\main\java\com\example\files\config\CorsConfig.java
-C:\Users\basav\Downloads\dms_project_final\dms-project\backend\file-storage-service\src\main\java\com\example\files\config\SecurityConfig.java
-C:\Users\basav\Downloads\dms_project_final\dms-project\backend\file-storage-service\src\main\java\com\example\files\config\SwaggerConfig.java
-C:\Users\basav\Downloads\dms_project_final\dms-project\backend\file-storage-service\src\main\java\com\example\files\controller\FileStorageController.java
-C:\Users\basav\Downloads\dms_project_final\dms-project\backend\file-storage-service\src\main\java\com\example\files\dto\ApiResponse.java
-C:\Users\basav\Downloads\dms_project_final\dms-project\backend\file-storage-service\src\main\java\com\example\files\dto\ChunkUploadRequest.java
-C:\Users\basav\Downloads\dms_project_final\dms-project\backend\file-storage-service\src\main\java\com\example\files\dto\FinalizeUploadRequest.java
-C:\Users\basav\Downloads\dms_project_final\dms-project\backend\file-storage-service\src\main\java\com\example\files\FileStorageServiceApplication.java
-C:\Users\basav\Downloads\dms_project_final\dms-project\backend\file-storage-service\src\main\java\com\example\files\service\FileStorageServiceImpl.java
