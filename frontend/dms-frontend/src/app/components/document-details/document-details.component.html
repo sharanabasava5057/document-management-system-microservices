@@ -1,0 +1,16 @@
+<div class="container" *ngIf="doc">
+  <h2>{{ doc.title }}</h2>
+
+  <p><strong>Description:</strong> {{ doc.description }}</p>
+  <p><strong>File name:</strong> {{ doc.fileName }}</p>
+  <p><strong>Uploaded By:</strong> {{ doc.uploadedBy }}</p>
+  <p><strong>Uploaded At:</strong> {{ doc.uploadDate | date:'medium' }}</p>
+
+  <button (click)="download()">Download File</button>
+  <button (click)="edit()">Edit Metadata</button>
+  <button (click)="router.navigate(['/documents'])">Back</button>
+</div>
+
+<div *ngIf="!doc && !loading">No document found</div>
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="error">{{ error }}</div>

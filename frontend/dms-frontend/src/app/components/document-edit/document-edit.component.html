@@ -1,0 +1,30 @@
+<div *ngIf="doc">
+  <h2>Edit document</h2>
+
+  <form #f="ngForm" (ngSubmit)="save(f)">
+    <div>
+      <label>Title</label>
+      <input name="title" [(ngModel)]="doc.title" required />
+    </div>
+
+    <div>
+      <label>Description</label>
+      <textarea name="description" [(ngModel)]="doc.description"></textarea>
+    </div>
+
+    <div>
+      <label>Uploaded By</label>
+      <input name="uploadedBy" [(ngModel)]="doc.uploadedBy" required />
+    </div>
+
+    <div>
+      <label>File name</label>
+      <input name="fileName" [(ngModel)]="doc.fileName" readonly />
+    </div>
+
+    <button type="submit" [disabled]="!f.valid">Save</button>
+    <button type="button" (click)="router.navigate(['/documents', doc.id])">Cancel</button>
+  </form>
+</div>
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="error">{{ error }}</div>

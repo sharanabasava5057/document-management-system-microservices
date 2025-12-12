@@ -1,0 +1,42 @@
+<div class="container">
+  <h2>Documents</h2>
+
+  <div class="search">
+    <input [(ngModel)]="query" placeholder="Search by title" />
+    <button (click)="load()">Search</button>
+    <button (click)="router.navigate(['/upload'])">Upload new</button>
+  </div>
+
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <table *ngIf="documents.length">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>File</th>
+        <th>Uploaded By</th>
+        <th>Upload Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of documents">
+        <td>{{ d.title }}</td>
+        <td>{{ d.description }}</td>
+        <td>{{ d.fileName }}</td>
+        <td>{{ d.uploadedBy }}</td>
+        <td>{{ d.uploadDate ? (d.uploadDate | date:'medium') : '-' }}</td>
+        <td>
+          <button (click)="view(d)">View</button>
+          <button (click)="download(d)">Download</button>
+          <button (click)="edit(d)">Edit</button>
+          <button (click)="delete(d)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!documents.length && !loading">No documents</div>
+</div>

@@ -1,0 +1,30 @@
+.edit-container {
+  width: 450px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+}
+
+button {
+  padding: 10px 20px;
+  margin-right: 10px;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}

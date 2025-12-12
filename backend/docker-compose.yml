@@ -1,0 +1,76 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dms
+      MYSQL_USER: dms_user
+      MYSQL_PASSWORD: dms_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - dms-network
+
+  discovery-service:
+    build: ./discovery-service
+    container_name: discovery-service
+    ports:
+      - "8761:8761"
+    environment:
+      EUREKA_INSTANCE_HOSTNAME: discovery-service
+      EUREKA_CLIENT_REGISTER_WITH_EUREKA: 'true'
+      EUREKA_CLIENT_FETCH_REGISTRY: 'false'
+    depends_on:
+      - mysql
+    networks:
+      - dms-network
+
+  document-metadata-service:
+    build: ./document-metadata-service
+    container_name: metadata-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/dms
+      SPRING_DATASOURCE_USERNAME: dms_user
+      SPRING_DATASOURCE_PASSWORD: dms_password
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-service:8761/eureka
+    depends_on:
+      - mysql
+      - discovery-service
+    networks:
+      - dms-network
+
+  file-storage-service:
+    build: ./file-storage-service
+    container_name: file-storage-service
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-service:8761/eureka
+    depends_on:
+      - discovery-service
+    networks:
+      - dms-network
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-service:8761/eureka
+    depends_on:
+      - discovery-service
+      - document-metadata-service
+      - file-storage-service
+    networks:
+      - dms-network
+
+volumes:
+  db_data:
+
+networks:
+  dms-network:
+    driver: bridge
